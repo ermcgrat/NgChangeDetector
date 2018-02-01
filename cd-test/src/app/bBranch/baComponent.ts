@@ -24,6 +24,20 @@ export class BAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   ngOnInit() {
     console.log('OnInit', this.compName);
+
+    // This component will no longer be checked by the change detector. It's template will not be updated, not even initially.
+    // The title will remain blank in the view. However, all of its lifecycle hooks will be called for each CD cycle,
+    // even those originating from this component. Title will still never be updated in template though.
+    this.cd.detach();
+
+    // setTimeout will cause a CD cycle to run, this component won't be updated.
+    setTimeout(() => {
+      console.log('update from', this.compName);
+      this.data.title = 'BA Comp :)';
+
+      // unless we were to reattach it. Now the comp will show the (updated) title.
+      this.cd.reattach();
+    }, 1000);
   }
 
   ngDoCheck() {
