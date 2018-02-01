@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges,
+import { Component, Input, ChangeDetectionStrategy, SimpleChanges, NgZone, ChangeDetectorRef,
   OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
   AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 
@@ -14,7 +14,7 @@ export class ABComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   compName = 'ABComponent';
 
-  constructor() {
+  constructor(private cd: ChangeDetectorRef, private zone: NgZone) {
     console.log('CONSTRUCTOR', this.compName);
    }
 
@@ -24,6 +24,18 @@ export class ABComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   ngOnInit() {
     console.log('OnInit', this.compName);
+
+    // Because we run this outside of angular, it won't cause any change detection to occur
+    this.zone.runOutsideAngular(() => {
+      setTimeout(() => {
+        console.log('update from', this.compName);
+        this.data.title = 'AB Comp!?!';
+
+        // we could leverage detectChanges to update the template, again, still without a change detection cycle ever running.
+        // markForCheck would do nothing, since not CD happens.
+        this.cd.detectChanges();
+      }, 3000);
+    });
   }
 
   ngDoCheck() {

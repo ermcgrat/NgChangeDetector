@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges,
+import { Component, Input, ChangeDetectionStrategy, SimpleChanges, ChangeDetectorRef,
   OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
   AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 
@@ -14,7 +14,7 @@ export class BAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   compName = 'BAComponent';
 
-  constructor() {
+  constructor(private cd: ChangeDetectorRef) {
     console.log('CONSTRUCTOR', this.compName);
    }
 
@@ -24,10 +24,6 @@ export class BAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   ngOnInit() {
     console.log('OnInit', this.compName);
-    // setTimeout(() => {
-    //   console.log('update from', this.compName);
-    //   this.data.title = 'BA Comp!!!';
-    // }, 2000);
   }
 
   ngDoCheck() {
