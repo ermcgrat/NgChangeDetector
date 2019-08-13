@@ -1,6 +1,12 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges, ChangeDetectorRef,
+import {
+  Component, Input, ChangeDetectionStrategy, SimpleChanges, ChangeDetectorRef,
   OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+  AfterViewInit, AfterViewChecked, OnDestroy
+} from '@angular/core';
+
+import { interval } from 'rxjs/observable/interval';
+import 'rxjs/add/operator/take';
+
 
 @Component({
   selector: 'aa-comp',
@@ -17,7 +23,7 @@ export class AAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   constructor(private cd: ChangeDetectorRef) {
     console.log('CONSTRUCTOR', this.compName);
-   }
+  }
 
   ngOnChanges() {
     console.log('OnChanges', this.compName);
@@ -40,6 +46,12 @@ export class AAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
       // Note that this will not cause the lifecycle hooks on this comp or its children to be fired. Template will update though.
       this.cd.detectChanges();
     }, 2000);
+
+    // Same story here. A CD cycle will run, starting at root. But it won't know this is the originating component, since we are doing it
+    // outside of the template. To fix this, we would either subscribe to this Observable in the template (via async pipe),
+    // or utilize the cd ref to markForCheck, etc
+    // const numbers = interval(1000).take(4);
+    // numbers.subscribe(x => console.log(x));
   }
 
   ngDoCheck() {

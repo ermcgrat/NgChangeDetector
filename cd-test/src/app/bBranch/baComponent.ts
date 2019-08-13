@@ -1,6 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges, ChangeDetectorRef,
+import {
+  Component, Input, ChangeDetectionStrategy, SimpleChanges, ChangeDetectorRef,
   OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+  AfterViewInit, AfterViewChecked, OnDestroy
+} from '@angular/core';
 
 @Component({
   selector: 'ba-comp',
@@ -16,7 +18,7 @@ export class BAComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   constructor(private cd: ChangeDetectorRef) {
     console.log('CONSTRUCTOR', this.compName);
-   }
+  }
 
   ngOnChanges() {
     console.log('OnChanges', this.compName);

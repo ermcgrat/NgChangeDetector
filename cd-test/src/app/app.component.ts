@@ -1,5 +1,7 @@
-import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import {
+  Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
+  AfterViewInit, AfterViewChecked, OnDestroy
+} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +40,7 @@ export class RootComponent implements OnChanges, OnInit, DoCheck, AfterContentIn
 
   constructor() {
     console.log('CONSTRUCTOR', this.compName);
-   }
+  }
 
   ngOnChanges() {
     console.log('OnChanges', this.compName);

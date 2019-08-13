@@ -1,6 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges, NgZone, ChangeDetectorRef,
+import {
+  Component, Input, ChangeDetectionStrategy, SimpleChanges, NgZone, ChangeDetectorRef,
   OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+  AfterViewInit, AfterViewChecked, OnDestroy
+} from '@angular/core';
 
 @Component({
   selector: 'ab-comp',
@@ -16,7 +18,7 @@ export class ABComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
 
   constructor(private cd: ChangeDetectorRef, private zone: NgZone) {
     console.log('CONSTRUCTOR', this.compName);
-   }
+  }
 
   ngOnChanges() {
     console.log('OnChanges', this.compName);
@@ -32,7 +34,7 @@ export class ABComponent implements OnChanges, OnInit, DoCheck, AfterContentInit
         this.data.title = 'AB Comp!?!';
 
         // we could leverage detectChanges to update the template, again, still without a change detection cycle ever running.
-        // markForCheck would do nothing, since not CD happens.
+        // markForCheck would do nothing, since no CD happens.
         this.cd.detectChanges();
       }, 3000);
     });
